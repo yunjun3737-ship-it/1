@@ -5826,8 +5826,7 @@ combatTab:CreateButton({Name = "우주 TP", Callback = function() game.Players.L
 combatTab:CreateButton({Name = "스폰 TP", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 15, 0) end})
 combatTab:CreateButton({Name = "랜덤 유저 TP", Callback = function() local ps = game.Players:GetPlayers() local r = ps[math.random(1, #ps)] if r.Character then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = r.Character.HumanoidRootPart.CFrame end end})
 combatTab:CreateButton({Name = "강제 앉기", Callback = function() game.Players.LocalPlayer.Character.Humanoid.Sit = true end})
-combatTab:CreateButton({Name = "UI 리로드", Callback = function() Rayfield:Destroy() task.wait(0.3) loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
- end})
+
 combatTab:CreateButton({Name = "맵 청소", Callback = function() if workspace:FindFirstChild("GrabParts") then workspace.GrabParts:Destroy() end end})
 combatTab:CreateButton({Name = "몸체 고정", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true end})
 combatTab:CreateButton({Name = "고정 해제", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false end})
