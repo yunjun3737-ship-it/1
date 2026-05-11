@@ -5809,7 +5809,7 @@ end
 
 ----------------------------------------------------------------------------------------- [ 시작 설정 ]
 -- [[ AIPA 환경 설정 ]]
-T1:CreateSection("시스템 및 시각화")
+
 T1:CreateToggle({Name = "풀브라이트", CurrentValue = false, Callback = function(v) if v then game:GetService("Lighting").Brightness = 2 game:GetService("Lighting").ClockTime = 14 else game:GetService("Lighting").Brightness = 1 end end})
 T1:CreateToggle({Name = "그림자 제거", CurrentValue = false, Callback = function(v) game:GetService("Lighting").GlobalShadows = not v end})
 T1:CreateToggle({Name = "저사양 모드", CurrentValue = false, Callback = function(v) if v then for _,x in pairs(game:GetDescendants()) do if x:IsA("BasePart") then x.Material = Enum.Material.SmoothPlastic end end end end})
