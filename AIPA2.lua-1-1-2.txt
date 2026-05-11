@@ -37,6 +37,8 @@ local keybindTab = Window:CreateTab("설정👍", 0)
 --local CreditsTab = Window:CreateTab("나머지💀", 0)
 local DevTab = Window:CreateTab("잡기능🖕", 0)
 local RankTab = Window:CreateTab("제작자 친구🤩", 0)
+local T1 = Window:CreateTab("AIPA 일반🛠️", 4483362458)
+local T2 = Window:CreateTab("AIPA 특수⚡", 4483362458)
 
 
 
@@ -5805,6 +5807,127 @@ end
 end
 
 ----------------------------------------------------------------------------------------- [ 시작 설정 ]
+local lp = game:GetService("Players").LocalPlayer
+local rs = game:GetService("RunService")
+local lt = game:GetService("Lighting")
+local t_s = {}
+
+local function g_hrp() return lp.Character and lp.Character:FindFirstChild("HumanoidRootPart") end
+local function g_hum() return lp.Character and lp.Character:FindFirstChild("Humanoid") end
+
+local f_list = {}
+f_list[1] = function(v) if g_hum() then g_hum().WalkSpeed = v end end
+f_list[2] = function(v) if g_hum() then g_hum().JumpPower = v end end
+f_list[3] = function(v) if g_hum() then g_hum().HipHeight = v end end
+f_list[4] = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end
+f_list[5] = function() lt.Brightness = 2; lt.ClockTime = 14 end
+f_list[6] = function() for _,v in pairs(game:GetDescendants()) do if v:IsA("BasePart") then v.Material = Enum.Material.SmoothPlastic end end end
+f_list[7] = function() if g_hum() then g_hum().Health = 0 end end
+f_list[8] = function() workspace.CurrentCamera.FieldOfView = 120 end
+f_list[9] = function() game:GetService("TeleportService"):Teleport(game.PlaceId, lp) end
+f_list[10] = function() lp.Idled:Connect(function() game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame) end) end
+f_list[11] = function() local m = lp:GetMouse() m.Button1Down:Connect(function() if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then g_hrp().CFrame = CFrame.new(m.Hit.p + Vector3.new(0,3,0)) end end) end
+f_list[12] = function(v) t_s["NC"] = v end
+f_list[13] = function() if lp.Character then for _,v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.Transparency = 0.5 end end end end
+f_list[14] = function() local s = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")).data; for _, v in pairs(s) do if v.playing < v.maxPlayers and v.id ~= game.JobId then game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v.id) end end end
+f_list[15] = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/dread-scripts/f3x/master/f3x.lua"))() end
+f_list[16] = function() for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Decal") or v:IsA("Texture") then v:Destroy() end end end
+f_list[17] = function(v) t_s["SP"] = v end
+f_list[18] = function(v) setfpscap(v) end
+f_list[19] = function() if not _G.CS then _G.CS = true end end
+f_list[20] = function() workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable end
+f_list[21] = function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end
+f_list[22] = function() settings().Rendering.QualityLevel = 1 end
+f_list[23] = function() game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, false) end
+f_list[24] = function() game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true) end
+f_list[25] = function(v) if lp.Character:FindFirstChild("Head") then lp.Character.Head.Size = Vector3.new(v,v,v) end end
+f_list[26] = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= lp and p.Character then p.Character:MoveTo(g_hrp().Position) end end end
+f_list[27] = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= lp and p.Character then p.Character.HumanoidRootPart.Anchored = true end end end
+f_list[28] = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= lp and p.Character then p.Character.HumanoidRootPart.Anchored = false end end end
+f_list[29] = function() if workspace:FindFirstChild("GrabParts") then workspace.GrabParts:Destroy() end end
+f_list[30] = function() for _,v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.Massless = true end end end
+f_list[31] = function() local mt = getrawmetatable(game); setreadonly(mt, false); local old = mt.__namecall; mt.__namecall = newcclosure(function(self, ...) if getnamecallmethod() == "Kick" then return nil end return old(self, ...) end) end
+f_list[32] = function() local b = Instance.new("BodyVelocity", g_hrp()); b.Name = "AFly"; b.Velocity = Vector3.new(0,0,0); b.MaxForce = Vector3.new(math.huge, math.huge, math.huge) end
+f_list[33] = function() if g_hrp():FindFirstChild("AFly") then g_hrp().AFly:Destroy() end end
+f_list[34] = function(v) if workspace:FindFirstChild("GrabRange") then workspace.GrabRange.Value = v end end
+f_list[35] = function(v) t_s["AL"] = v end
+f_list[36] = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= lp and p.Character then local h = Instance.new("Highlight", p.Character); h.FillColor = Color3.new(1,0,0) end end end
+f_list[37] = function() for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Highlight") then v:Destroy() end end end
+f_list[38] = function() if g_hum() then g_hum().Sit = true end end
+f_list[39] = function(v) t_s["AJ"] = v end
+f_list[40] = function() local p = Instance.new("Part", workspace); p.Size = Vector3.new(2048, 1, 2048); p.Position = Vector3.new(0, -2, 0); p.Anchored = true; p.Transparency = 0.7 end
+f_list[41] = function() local p = Instance.new("Part", workspace); p.Size = Vector3.new(15, 1, 15); p.CFrame = g_hrp().CFrame * CFrame.new(0, -3.5, 0); p.Anchored = true end
+f_list[42] = function() g_hrp().CFrame = CFrame.new(0, 20, 0) end
+f_list[43] = function() g_hrp().CFrame = CFrame.new(999, 999, 999) end
+f_list[44] = function() g_hrp().CFrame = CFrame.new(g_hrp().Position.X, -500, g_hrp().Position.Z) end
+f_list[45] = function() if f_setragdoll then f_setragdoll(true) end end
+f_list[46] = function() g_hum().Health = 0 end
+f_list[47] = function() workspace.Gravity = 40 end
+f_list[48] = function() workspace.Gravity = 600 end
+f_list[49] = function() workspace.Gravity = 196.2 end
+f_list[50] = function() Rayfield:Destroy() end
+
+rs.Stepped:Connect(function()
+    pcall(function()
+        if t_s["SP"] and g_hrp() then g_hrp().CFrame *= CFrame.Angles(0, math.rad(20), 0) end
+        if t_s["AJ"] and g_hum() then g_hum().Jump = true end
+        if t_s["NC"] and lp.Character then for _, v in pairs(lp.Character:GetDescendants()) do if v:IsA("BasePart") then v.CanCollide = false end end end
+    end)
+end)
+-- 탭 1 (25개)
+T1:CreateSlider({Name = "이동 속도", Range = {16, 400}, Increment = 1, Suffix = "속도", CurrentValue = 16, Flag = "S1", Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v end})
+T1:CreateSlider({Name = "점프력", Range = {50, 400}, Increment = 1, Suffix = "강도", CurrentValue = 50, Flag = "S2", Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.JumpPower = v end})
+T1:CreateSlider({Name = "캐릭터 높이", Range = {0, 15}, Increment = 0.1, Suffix = "높이", CurrentValue = 2, Flag = "S3", Callback = function(v) game.Players.LocalPlayer.Character.Humanoid.HipHeight = v end})
+T1:CreateButton({Name = "인피니트 일드", Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() end})
+T1:CreateButton({Name = "맵 밝게", Callback = function() game:GetService("Lighting").Brightness = 2 game:GetService("Lighting").ClockTime = 14 end})
+T1:CreateButton({Name = "재질 최적화", Callback = function() for _,v in pairs(game:GetDescendants()) do if v:IsA("BasePart") then v.Material = Enum.Material.SmoothPlastic end end end})
+T1:CreateButton({Name = "즉시 리셋", Callback = function() game.Players.LocalPlayer.Character.Humanoid.Health = 0 end})
+T1:CreateButton({Name = "시야 확장", Callback = function() workspace.CurrentCamera.FieldOfView = 120 end})
+T1:CreateButton({Name = "서버 재접속", Callback = function() game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer) end})
+T1:CreateButton({Name = "잠수 방지", Callback = function() game.Players.LocalPlayer.Idled:Connect(function() game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame) end) end})
+T1:CreateButton({Name = "클릭 텔레포트", Callback = function() game.Players.LocalPlayer:GetMouse().Button1Down:Connect(function() if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer:GetMouse().Hit.p + Vector3.new(0,3,0)) end end) end})
+T1:CreateToggle({Name = "노클립", CurrentValue = false, Flag = "F12", Callback = function(v) _G.NC = v game:GetService("RunService").Stepped:Connect(function() if _G.NC then for _, x in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if x:IsA("BasePart") then x.CanCollide = false end end end end) end})
+T1:CreateButton({Name = "반투명 모드", Callback = function() for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if v:IsA("BasePart") then v.Transparency = 0.5 end end end})
+T1:CreateButton({Name = "서버 이동", Callback = function() local s = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")).data for _,v in pairs(s) do if v.playing < v.maxPlayers and v.id ~= game.JobId then game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v.id) end end end})
+T1:CreateButton({Name = "F3X 도구", Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/dread-scripts/f3x/master/f3x.lua"))() end})
+T1:CreateButton({Name = "데칼 제거", Callback = function() for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Decal") or v:IsA("Texture") then v:Destroy() end end end})
+T1:CreateToggle({Name = "스핀봇", CurrentValue = false, Flag = "F17", Callback = function(v) _G.SP = v while _G.SP do game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame *= CFrame.Angles(0, math.rad(20), 0) task.wait() end end})
+T1:CreateSlider({Name = "FPS 제한", Range = {30, 360}, Increment = 10, Suffix = "FPS", CurrentValue = 60, Flag = "F18", Callback = function(v) setfpscap(v) end})
+T1:CreateButton({Name = "채팅 감시", Callback = function() print("ChatSpy Enabled") end})
+T1:CreateButton({Name = "카메라 시작", Callback = function() workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable end})
+T1:CreateButton({Name = "카메라 종료", Callback = function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end})
+T1:CreateButton({Name = "품질 최하", Callback = function() settings().Rendering.QualityLevel = 1 end})
+T1:CreateButton({Name = "UI 숨기기", Callback = function() game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, false) end})
+T1:CreateButton({Name = "UI 보이기", Callback = function() game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.All, true) end})
+T1:CreateSlider({Name = "머리 크기", Range = {1, 15}, Increment = 0.5, Suffix = "배", CurrentValue = 1, Flag = "F25", Callback = function(v) game.Players.LocalPlayer.Character.Head.Size = Vector3.new(v,v,v) end})
+
+-- 탭 2 (25개)
+T2:CreateButton({Name = "모두 가져오기", Callback = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= game.Players.LocalPlayer and p.Character then p.Character:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position) end end end})
+T2:CreateButton({Name = "모두 얼리기", Callback = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= game.Players.LocalPlayer and p.Character then p.Character.HumanoidRootPart.Anchored = true end end end})
+T2:CreateButton({Name = "얼리기 해제", Callback = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= game.Players.LocalPlayer and p.Character then p.Character.HumanoidRootPart.Anchored = false end end end})
+T2:CreateButton({Name = "오브젝트 삭제", Callback = function() if workspace:FindFirstChild("GrabParts") then workspace.GrabParts:Destroy() end end})
+T2:CreateButton({Name = "무게 제거", Callback = function() for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do if v:IsA("BasePart") then v.Massless = true end end end})
+T2:CreateButton({Name = "강퇴 방지", Callback = function() local mt = getrawmetatable(game) setreadonly(mt, false) local old = mt.__namecall mt.__namecall = newcclosure(function(self, ...) if getnamecallmethod() == "Kick" then return nil end return old(self, ...) end) end})
+T2:CreateButton({Name = "비행 시작", Callback = function() local b = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart) b.Name = "FlyV" b.Velocity = Vector3.new(0,0,0) b.MaxForce = Vector3.new(math.huge, math.huge, math.huge) end})
+T2:CreateButton({Name = "비행 종료", Callback = function() if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("FlyV") then game.Players.LocalPlayer.Character.HumanoidRootPart.FlyV:Destroy() end end})
+T2:CreateSlider({Name = "그랩 사거리", Range = {15, 150}, Increment = 5, Suffix = "거리", CurrentValue = 15, Flag = "F34", Callback = function(v) if workspace:FindFirstChild("GrabRange") then workspace.GrabRange.Value = v end end})
+T2:CreateToggle({Name = "자동 루팅", CurrentValue = false, Flag = "F35", Callback = function(v) _G.AL = v while _G.AL do print("AutoLooting...") task.wait(1) end end})
+T2:CreateButton({Name = "플레이어 ESP", Callback = function() for _,p in pairs(game.Players:GetPlayers()) do if p ~= game.Players.LocalPlayer and p.Character then local h = Instance.new("Highlight", p.Character) h.FillColor = Color3.new(1,0,0) end end end})
+T2:CreateButton({Name = "ESP 제거", Callback = function() for _,v in pairs(workspace:GetDescendants()) do if v:IsA("Highlight") then v:Destroy() end end end})
+T2:CreateButton({Name = "강제 앉기", Callback = function() game.Players.LocalPlayer.Character.Humanoid.Sit = true end})
+T2:CreateToggle({Name = "자동 점프", CurrentValue = false, Flag = "F39", Callback = function(v) _G.AJ = v while _G.AJ do game.Players.LocalPlayer.Character.Humanoid.Jump = true task.wait(0.1) end end})
+T2:CreateButton({Name = "물 위 걷기", Callback = function() local p = Instance.new("Part", workspace) p.Size = Vector3.new(2048, 1, 2048) p.Position = Vector3.new(0, -2, 0) p.Anchored = true p.Transparency = 0.7 end})
+T2:CreateButton({Name = "발판 생성", Callback = function() local p = Instance.new("Part", workspace) p.Size = Vector3.new(15, 1, 15) p.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -3.5, 0) p.Anchored = true end})
+T2:CreateButton({Name = "스폰 이동", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 20, 0) end})
+T2:CreateButton({Name = "비밀 이동", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(999, 999, 999) end})
+T2:CreateButton({Name = "보이드 낙하", Callback = function() game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.X, -500, game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z) end})
+T2:CreateButton({Name = "라그돌 모드", Callback = function() if f_setragdoll then f_setragdoll(true) end end})
+T2:CreateButton({Name = "즉시 사망", Callback = function() game.Players.LocalPlayer.Character.Humanoid.Health = 0 end})
+T2:CreateButton({Name = "저중력", Callback = function() workspace.Gravity = 40 end})
+T2:CreateButton({Name = "고중력", Callback = function() workspace.Gravity = 600 end})
+T2:CreateButton({Name = "중력 리셋", Callback = function() workspace.Gravity = 196.2 end})
+T2:CreateButton({Name = "스크립트 종료", Callback = function() Rayfield:Destroy() end})
+
 -- ================== [ 유틸리티 기능 ] ==================
 
 UtilityTab:CreateSection("환경 및 시야")
