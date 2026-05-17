@@ -16,7 +16,7 @@ local Window = Rayfield:CreateWindow({
     },
     KeySystem = true, -- 키 시스템 활성화
     KeySettings = {
-        Title = "AIPA Key System",
+        Title = "파카허브 키시스템",
         Subtitle = "인증 키를 입력하세요",
         Note = "오너(알파카👑)에게서 키를 받을수있습니다.(800로벅)",
         FileName = "AIPA_Key", 
