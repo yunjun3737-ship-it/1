@@ -28,53 +28,52 @@ local Window = Rayfield:CreateWindow({
 local NP = {
     TextColor = Color3.fromRGB(255, 255, 255),
 
-    
-    Background = Color3.fromRGB(10, 10, 10),
+    Background = Color3.fromRGB(8, 8, 8),
     Topbar = Color3.fromRGB(15, 15, 15),
     Shadow = Color3.fromRGB(0, 0, 0),
 
-    NotificationBackground = Color3.fromRGB(15, 15, 15),
-    NotificationActionsBackground = Color3.fromRGB(25, 25, 25),
+    NotificationBackground = Color3.fromRGB(12, 12, 12),
+    NotificationActionsBackground = Color3.fromRGB(20, 20, 20),
 
-    
     TabBackground = Color3.fromRGB(15, 15, 15),
-    TabStroke = Color3.fromRGB(0, 255, 100),        
-    TabBackgroundSelected = Color3.fromRGB(30, 30, 30),
+    TabStroke = Color3.fromRGB(0, 255, 100),
+    TabBackgroundSelected = Color3.fromRGB(40, 10, 10),
     TabTextColor = Color3.fromRGB(255, 255, 255),
-    SelectedTabTextColor = Color3.fromRGB(255, 50, 50), 
+    SelectedTabTextColor = Color3.fromRGB(255, 60, 60),
 
-    
-    ElementBackground = Color3.fromRGB(20, 20, 20),
-    ElementBackgroundHover = Color3.fromRGB(35, 35, 35),
+    ElementBackground = Color3.fromRGB(18, 18, 18),
+    ElementBackgroundHover = Color3.fromRGB(40, 20, 20),
     SecondaryElementBackground = Color3.fromRGB(15, 15, 15),
-    ElementStroke = Color3.fromRGB(0, 255, 100),        
+    ElementStroke = Color3.fromRGB(0, 255, 100),
     SecondaryElementStroke = Color3.fromRGB(0, 200, 80),
 
-    
     SliderBackground = Color3.fromRGB(30, 30, 30),
-    SliderProgress = Color3.fromRGB(255, 140, 0),       
-    SliderStroke = Color3.fromRGB(0, 255, 100),         
+    SliderProgress = Color3.fromRGB(255, 140, 0),
+    SliderStroke = Color3.fromRGB(0, 255, 100),
 
-    
     ToggleBackground = Color3.fromRGB(25, 25, 25),
-
-    ToggleEnabled = Color3.fromRGB(255, 140, 0),        
-    ToggleEnabledStroke = Color3.fromRGB(0, 255, 100),
-    ToggleEnabledOuterStroke = Color3.fromRGB(255, 80, 0),
+    ToggleEnabled = Color3.fromRGB(255, 140, 0),
+    ToggleEnabledStroke = Color3.fromRGB(255, 100, 0),
+    ToggleEnabledOuterStroke = Color3.fromRGB(255, 60, 60),
 
     ToggleDisabled = Color3.fromRGB(40, 40, 40),
-    ToggleDisabledStroke = Color3.fromRGB(80, 80, 80),
+    ToggleDisabledStroke = Color3.fromRGB(70, 70, 70),
     ToggleDisabledOuterStroke = Color3.fromRGB(30, 30, 30),
 
-    
-    DropdownSelected = Color3.fromRGB(255, 140, 0),    
+    DropdownSelected = Color3.fromRGB(255, 140, 0),
     DropdownUnselected = Color3.fromRGB(25, 25, 25),
 
-    
-    InputBackground = Color3.fromRGB(20, 20, 20),
-    InputStroke = Color3.fromRGB(0, 255, 100),         
-    PlaceholderColor = Color3.fromRGB(120, 120, 120),
+    InputBackground = Color3.fromRGB(18, 18, 18),
+    InputStroke = Color3.fromRGB(0, 255, 100),
+    PlaceholderColor = Color3.fromRGB(130, 130, 130),
 }
+
+
+if Rayfield and Rayfield.UpdateTheme then
+    Rayfield.UpdateTheme(NP)
+else
+    getgenv().RayfieldTheme = NP
+end
 local playerTab = Window:CreateTab("플레이어 설정😀", 0)
 local grabTab = Window:CreateTab("컴뱃👑", 0)
 local UtilityTab = Window:CreateTab("유틸리티🤏", 0)
