@@ -288,49 +288,55 @@ G:WaitForChild("EndGrabEarly"):Destroy()
 Instance.new("RemoteEvent", G).Name = "EndGrabEarly"
 
 local NP = {
-    TextColor = Color3.fromRGB(255,255,255),
+    TextColor = Color3.fromRGB(255, 255, 255),
 
-    Background = Color3.fromRGB(20,20,20),
-    Topbar = Color3.fromRGB(30,30,30),
-    Shadow = Color3.fromRGB(15,15,15),
+    
+    Background = Color3.fromRGB(10, 10, 10),
+    Topbar = Color3.fromRGB(15, 15, 15),
+    Shadow = Color3.fromRGB(0, 0, 0),
 
-    NotificationBackground = Color3.fromRGB(25,25,25),
-    NotificationActionsBackground = Color3.fromRGB(40,40,40),
+    NotificationBackground = Color3.fromRGB(15, 15, 15),
+    NotificationActionsBackground = Color3.fromRGB(25, 25, 25),
 
-    TabBackground = Color3.fromRGB(40,40,40),
-    TabStroke = Color3.fromRGB(70,70,70),
-    TabBackgroundSelected = Color3.fromRGB(60,60,60),
-    TabTextColor = Color3.fromRGB(255,255,255),
-    SelectedTabTextColor = Color3.fromRGB(255,0,0),
+    
+    TabBackground = Color3.fromRGB(15, 15, 15),
+    TabStroke = Color3.fromRGB(0, 255, 100),        
+    TabBackgroundSelected = Color3.fromRGB(30, 30, 30),
+    TabTextColor = Color3.fromRGB(255, 255, 255),
+    SelectedTabTextColor = Color3.fromRGB(255, 50, 50), 
 
-    ElementBackground = Color3.fromRGB(35,35,35),
-    ElementBackgroundHover = Color3.fromRGB(50,50,50),
-    SecondaryElementBackground = Color3.fromRGB(25,25,25),
-    ElementStroke = Color3.fromRGB(60,60,60),
-    SecondaryElementStroke = Color3.fromRGB(45,45,45),
+    
+    ElementBackground = Color3.fromRGB(20, 20, 20),
+    ElementBackgroundHover = Color3.fromRGB(35, 35, 35),
+    SecondaryElementBackground = Color3.fromRGB(15, 15, 15),
+    ElementStroke = Color3.fromRGB(0, 255, 100),        
+    SecondaryElementStroke = Color3.fromRGB(0, 200, 80),
 
-    SliderBackground = Color3.fromRGB(60,60,60),
-    SliderProgress = Color3.fromRGB(0,170,255),
-    SliderStroke = Color3.fromRGB(0,120,200),
+    
+    SliderBackground = Color3.fromRGB(30, 30, 30),
+    SliderProgress = Color3.fromRGB(255, 140, 0),       
+    SliderStroke = Color3.fromRGB(0, 255, 100),         
 
-    ToggleBackground = Color3.fromRGB(30,30,30),
+    
+    ToggleBackground = Color3.fromRGB(25, 25, 25),
 
-    ToggleEnabled = Color3.fromRGB(185,0,0),
-    ToggleEnabledStroke = Color3.fromRGB(255,255,255),
-    ToggleEnabledOuterStroke = Color3.fromRGB(255,255,255),
+    ToggleEnabled = Color3.fromRGB(255, 140, 0),        
+    ToggleEnabledStroke = Color3.fromRGB(0, 255, 100),
+    ToggleEnabledOuterStroke = Color3.fromRGB(255, 80, 0),
 
-    ToggleDisabled = Color3.fromRGB(100, 100, 100),
-    ToggleDisabledStroke = Color3.fromRGB(125, 125, 125),
-    ToggleDisabledOuterStroke = Color3.fromRGB(65, 65, 65),
+    ToggleDisabled = Color3.fromRGB(40, 40, 40),
+    ToggleDisabledStroke = Color3.fromRGB(80, 80, 80),
+    ToggleDisabledOuterStroke = Color3.fromRGB(30, 30, 30),
 
-    DropdownSelected = Color3.fromRGB(50,50,50),
-    DropdownUnselected = Color3.fromRGB(30,30,30),
+    
+    DropdownSelected = Color3.fromRGB(255, 140, 0),    
+    DropdownUnselected = Color3.fromRGB(25, 25, 25),
 
-    InputBackground = Color3.fromRGB(25,25,25),
-    InputStroke = Color3.fromRGB(45,45,45),
-    PlaceholderColor = Color3.fromRGB(150,150,150),
+    
+    InputBackground = Color3.fromRGB(20, 20, 20),
+    InputStroke = Color3.fromRGB(0, 255, 100),         
+    PlaceholderColor = Color3.fromRGB(120, 120, 120),
 }
-
 ----------------------------------------------------------------------------------------- [ 기능들 ]
 function ForWhiteList(enable)
     WhiteListMode = enable
