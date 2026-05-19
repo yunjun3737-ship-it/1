@@ -37,9 +37,9 @@ local keybindTab = Window:CreateTab("설정👍", 0)
 --local CreditsTab = Window:CreateTab("나머지💀", 0)
 local DevTab = Window:CreateTab("잡기능🖕", 0)
 local RankTab = Window:CreateTab("제작자 친구🤩", 0)
-local environmentTab = Window:CreateTab("환경 설정🛠️", 0)
-local combatTab = Window:CreateTab("전투 확장⚡", 0)
-local BlacklistTab = Window:CreateTab("블랙리스트❌", 0)
+local environmentTab = Window:CreateTab("환경 설정☠️", 0)
+local combatTab = Window:CreateTab("전투 확장☑️", 0)
+local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집)", 0)
 
 
 Players = game:GetService("Players")
