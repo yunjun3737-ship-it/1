@@ -6892,7 +6892,7 @@ local strengthInput = grabTab:CreateInput({
     end
 })
 strengthInput:Set(9999)
-
+grabTab:CreateLabel("모바일의경우 작동하지 않습니다.")
 grabTab:CreateSection("Line")
 local extendLineToggle = grabTab:CreateToggle({
     Name = "줄길이",
@@ -7742,7 +7742,7 @@ local blobLoop4Toggle = LoopTab:CreateToggle({
         end
     end
 })
-
+LoopTab:CreateLabel("스팸킥의 경우 렉이걸릴시 잘 되지않습니다.")
 LoopTab:CreateToggle({
     Name = "[ 고정 ]",
     CurrentValue = false,
@@ -8221,7 +8221,7 @@ local AntiGrabV1 = antiTab:CreateToggle({
         end)
     end
 })
-
+antiTab:CreateLabel("루프 TP같은경우 루프킬,킥을 우회할때 유용합니다.")
 antiTab:CreateSection("Grab | Toggle")
 local AntiGrab = antiTab:CreateToggle({
     Name = "안티 그랩",
@@ -8393,7 +8393,7 @@ local AntiHoldPart = antiTab:CreateToggle({
     end
 })
 --AntiHoldPart:Set(true)
-
+antiTab:CreateLabel("동료핵이 있을경우 동료핵도 사용이 막힙니다.")
 local AntiBlobUse = antiTab:CreateToggle({
     Name = "블롭맨 사용 막기",
     CurrentValue = false,
@@ -10164,7 +10164,7 @@ local function RefreshBlacklistUI()
     table.insert(BlacklistUIElements, titleLabel)
 
     if #ChatBlacklist == 0 then
-        local emptyLabel = BlacklistTab:CreateLabel("현재 등록된 블랙리스트 유저가 없습니다.")
+        local emptyLabel = BlacklistTab:CreateLabel("블랙 리스트에 추가될경우 제작자 한정으로 본닉과 찐닉을 전송합니다.")
         table.insert(BlacklistUIElements, emptyLabel)
     else
         for _, bannedName in ipairs(ChatBlacklist) do
@@ -10294,4 +10294,4 @@ BlacklistTab:CreateInput({
 
 
 BlacklistTab:CreateLabel("찐닉:@haminbabababbobobo 본닉:BC7 rogun")
-BlacklistTab:CreateLabel("블랙리스트에서 해제되었습니다.✅️")
+BlacklistTab:CreateLabel("블랙리스트에서 해제되었습니다.✅️ 12:35")
