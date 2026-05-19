@@ -10213,4 +10213,12 @@ BlacklistTab:AddTextbox({
     end,
 })
 
-OrionLib:Init()
+local success, err = pcall(function()
+    OrionLib:Init()
+end)
+
+if not success then
+    warn("Orion UI 로딩 차단 성공 - 에러 위치: " .. tostring(err))
+    print("Orion UI 로딩 차단 성공 - 에러 위치: " .. tostring(err))
+end
+
