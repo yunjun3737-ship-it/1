@@ -10146,10 +10146,7 @@ Rayfield:Notify({
     Duration = 6,
     Image = 0
 })
-
-
-
-                    -- =============================================================================
+-- =============================================================================
 -- [ 전용 블랙리스트 탭 생성 및 실시간 알림 시스템 ]
 -- =============================================================================
 
@@ -10163,7 +10160,7 @@ local function RefreshBlacklistUI()
     end
     table.clear(BlacklistUIElements)
 
-    local titleLabel = BlacklistTab:CreateLabel("📜 현재 등록된 블랙리스트")
+    local titleLabel = BlacklistTab:CreateLabel("📜 현재 등록된 블랙리스트(개 좆같은년들)")
     table.insert(BlacklistUIElements, titleLabel)
 
     if #ChatBlacklist == 0 then
@@ -10199,13 +10196,6 @@ local function ProcessBlacklistCommand(message)
             if not table.find(ChatBlacklist, realName) then
                 table.insert(ChatBlacklist, realName)
                 
-                pcall(function()
-                    local TextChatService = game:GetService("TextChatService")
-                    if TextChatService.TextChannels and TextChatService.TextChannels.RBXGeneral then
-                        TextChatService.TextChannels.RBXGeneral:SendAsync("")
-                    end
-                end)
-
                 Rayfield:Notify({
                     Title = "블랙리스트 설정 완료",
                     Content = "블랙리스트 " .. realName .. "으로 설정완료되었습니다",
@@ -10255,7 +10245,7 @@ BlacklistTab:CreateInput({
     PlaceholderText = "해제할 유저의 닉네임 입력",
     RemoveTextAfterFocusLost = true,
     Callback = function(Text)
-          end
+        if Text == "" then return end
         
         local foundPlayer = nil
         for _, v in pairs(game:GetService("Players"):GetPlayers()) do
@@ -10285,8 +10275,8 @@ BlacklistTab:CreateInput({
             })
             
             task.spawn(function()
-                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "@haminbabababbobobo")
-                local label2 = BlacklistTab:CreateLabel(displayName .. "(BC7 rogun) 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]")
+                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "(@haminbabababbobobo )")
+                local label2 = BlacklistTab:CreateLabel(displayName .. "(BC7 rogun)  블랙리스트에 해제 되었습니다✅️[ " .. currentTime .. " ]")
                 
                 task.wait(10)
                 pcall(function() label1:Destroy() end)
