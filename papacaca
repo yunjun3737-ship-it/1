@@ -39,7 +39,7 @@ local DevTab = Window:CreateTab("잡기능🖕", 0)
 local RankTab = Window:CreateTab("제작자 친구🤩", 0)
 local environmentTab = Window:CreateTab("환경 설정🛠️", 0)
 local combatTab = Window:CreateTab("전투 확장⚡", 0)
-
+local BlacklistTab = Window:CreateTab("블랙리스트❌", 0)
 
 
 Players = game:GetService("Players")
@@ -10150,7 +10150,7 @@ Rayfield:Notify({
 -- [ 전용 블랙리스트 탭 생성 및 실시간 알림 시스템 ]
 -- =============================================================================
 
-local BlacklistTab = Window:CreateTab("블랙리스트❌", 0)
+
 local ChatBlacklist = {}
 local BlacklistUIElements = {}
 
@@ -10160,7 +10160,7 @@ local function RefreshBlacklistUI()
     end
     table.clear(BlacklistUIElements)
 
-    local titleLabel = BlacklistTab:CreateLabel("📜 현재 등록된 블랙리스트(개 좆같은년들)")
+    local titleLabel = BlacklistTab:CreateLabel("📜 현재 등록된 블랙리스트")
     table.insert(BlacklistUIElements, titleLabel)
 
     if #ChatBlacklist == 0 then
@@ -10275,8 +10275,8 @@ BlacklistTab:CreateInput({
             })
             
             task.spawn(function()
-                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "(@haminbabababbobobo )")
-                local label2 = BlacklistTab:CreateLabel(displayName .. "(BC7 rogun)  블랙리스트에 해제 되었습니다✅️[ " .. currentTime .. " ]")
+                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "(본닉)")
+                local label2 = BlacklistTab:CreateLabel(displayName .. "(가짜닉) 인데 해제칸에 저 닉이 보이면서 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]")
                 
                 task.wait(10)
                 pcall(function() label1:Destroy() end)
@@ -10291,3 +10291,7 @@ BlacklistTab:CreateInput({
         end
     end,
 })
+
+
+BlacklistTab:CreateLabel("찐닉:@haminbabababbobobo 본닉:BC7 rogun")
+BlacklistTab:CreateLabel("블랙리스트에서 해제되었습니다.✅️")
