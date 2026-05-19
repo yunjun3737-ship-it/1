@@ -10300,5 +10300,3 @@ BlacklistTab:CreateInput({
 })
 
 
-BlacklistTab:CreateLabel("찐닉:@haminbabababbobobo 본닉:BC7 rogun")
-BlacklistTab:CreateLabel("블랙리스트에서 해제되었습니다.✅️ 12:35")
