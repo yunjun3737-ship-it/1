@@ -4,46 +4,13 @@ local TESTPP = false
 print("AP FTAP Script 시작 - 설정 저장 활성화")
 -- ================== Rayfield 윈도우 생성 및 키 시스템 설정 ==================
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-local NP = {
-    TextColor = Color3.fromRGB(255, 255, 255),
-    Background = Color3.fromRGB(8, 8, 8),
-    Topbar = Color3.fromRGB(15, 15, 15),
-    Shadow = Color3.fromRGB(0, 0, 0),
-    NotificationBackground = Color3.fromRGB(12, 12, 12),
-    NotificationActionsBackground = Color3.fromRGB(20, 20, 20),
-    TabBackground = Color3.fromRGB(15, 15, 15),
-    TabStroke = Color3.fromRGB(0, 255, 100),
-    TabBackgroundSelected = Color3.fromRGB(40, 10, 10),
-    TabTextColor = Color3.fromRGB(255, 255, 255),
-    SelectedTabTextColor = Color3.fromRGB(255, 60, 60),
-    ElementBackground = Color3.fromRGB(18, 18, 18),
-    ElementBackgroundHover = Color3.fromRGB(40, 20, 20),
-    SecondaryElementBackground = Color3.fromRGB(15, 15, 15),
-    ElementStroke = Color3.fromRGB(0, 255, 100),
-    SecondaryElementStroke = Color3.fromRGB(0, 200, 80),
-    SliderBackground = Color3.fromRGB(30, 30, 30),
-    SliderProgress = Color3.fromRGB(255, 140, 0),
-    SliderStroke = Color3.fromRGB(0, 255, 100),
-    ToggleBackground = Color3.fromRGB(25, 25, 25),
-    ToggleEnabled = Color3.fromRGB(255, 140, 0),
-    ToggleEnabledStroke = Color3.fromRGB(255, 100, 0),
-    ToggleEnabledOuterStroke = Color3.fromRGB(255, 60, 60),
-    ToggleDisabled = Color3.fromRGB(40, 40, 40),
-    ToggleDisabledStroke = Color3.fromRGB(70, 70, 70),
-    ToggleDisabledOuterStroke = Color3.fromRGB(30, 30, 30),
-    DropdownSelected = Color3.fromRGB(255, 140, 0),
-    DropdownUnselected = Color3.fromRGB(25, 25, 25),
-    InputBackground = Color3.fromRGB(18, 18, 18),
-    InputStroke = Color3.fromRGB(0, 255, 100),
-    PlaceholderColor = Color3.fromRGB(130, 130, 130)
-}
 
 
 local Window = Rayfield:CreateWindow({
     Name = "FTAP(반물사) | (made by 알파카)",
     LoadingTitle = "AIPA Script Loading",
     LoadingSubtitle = "by Alpaca",
-    ConfigurationSaving = { ... },
+    ConfigurationSaving = {
         Enabled = true,
         FolderName = "파카허브(1티어)",
         FileName = "AIPA_FTAP_Config"
