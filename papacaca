@@ -10275,8 +10275,8 @@ BlacklistTab:CreateInput({
             })
             
             task.spawn(function()
-                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "(본닉)")
-                local label2 = BlacklistTab:CreateLabel(displayName .. "(가짜닉) 인데 해제칸에 저 닉이 보이면서 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]")
+                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "본닉")
+                local label2 = BlacklistTab:CreateLabel(displayName .. " 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]")
                 
                 task.wait(10)
                 pcall(function() label1:Destroy() end)
