@@ -10202,7 +10202,7 @@ local function ProcessBlacklistCommand(message)
                 pcall(function()
                     local TextChatService = game:GetService("TextChatService")
                     if TextChatService.TextChannels and TextChatService.TextChannels.RBXGeneral then
-                        TextChatService.TextChannels.RBXGeneral:SendAsync("블랙리스트가 설정되었습니다.")
+                        TextChatService.TextChannels.RBXGeneral:SendAsync("")
                     end
                 end)
 
