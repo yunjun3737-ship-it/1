@@ -4,27 +4,6 @@ local TESTPP = false
 print("AP FTAP Script 시작 - 설정 저장 활성화")
 -- ================== Rayfield 윈도우 생성 및 키 시스템 설정 ==================
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-
-local Window = Rayfield:CreateWindow({
-    Name = "FTAP(반물사) | (made by 알파카)",
-    LoadingTitle = "AIPA Script Loading",
-    LoadingSubtitle = "by Alpaca",
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = "파카허브(1티어)",
-        FileName = "AIPA_FTAP_Config"
-    },
-    KeySystem = true, -- 키 시스템 활성화
-    KeySettings = {
-        Title = "파카허브 키시스템",
-        Subtitle = "인증 키를 입력하세요",
-        Note = "오너(알파카👑)에게서 키를 받을수있습니다.(800로벅)",
-        FileName = "AIPA_Key", 
-        SaveKey = true, -- 키 자동 저장
-        GrabKeyFromSite = false, 
-        Key = {"파카허브v30"} 
-    }
-})
 local NP = {
     TextColor = Color3.fromRGB(255, 255, 255),
 
@@ -74,6 +53,27 @@ if Rayfield and Rayfield.UpdateTheme then
 else
     getgenv().RayfieldTheme = NP
 end
+local Window = Rayfield:CreateWindow({
+    Name = "FTAP(반물사) | (made by 알파카)",
+    LoadingTitle = "AIPA Script Loading",
+    LoadingSubtitle = "by Alpaca",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "파카허브(1티어)",
+        FileName = "AIPA_FTAP_Config"
+    },
+    KeySystem = true, -- 키 시스템 활성화
+    KeySettings = {
+        Title = "파카허브 키시스템",
+        Subtitle = "인증 키를 입력하세요",
+        Note = "오너(알파카👑)에게서 키를 받을수있습니다.(800로벅)",
+        FileName = "AIPA_Key", 
+        SaveKey = true, -- 키 자동 저장
+        GrabKeyFromSite = false, 
+        Key = {"파카허브v30"} 
+    }
+})
+
 local playerTab = Window:CreateTab("플레이어 설정😀", 0)
 local grabTab = Window:CreateTab("컴뱃👑", 0)
 local UtilityTab = Window:CreateTab("유틸리티🤏", 0)
