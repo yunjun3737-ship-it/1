@@ -1,28 +1,6 @@
 
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/jensonhirst/Orion/main/source'))()
 
-local Colors = {
-    WindowBackground = Color3.fromRGB(0, 0, 0),
-    Background = Color3.fromRGB(5, 5, 5),
-    NavBackground = Color3.fromRGB(10, 10, 10),
-    TabStroke = Color3.fromRGB(255, 0, 0),
-    ElementStroke = Color3.fromRGB(0, 255, 100),
-    ToggleEnabled = Color3.fromRGB(255, 120, 0),
-    SliderProgress = Color3.fromRGB(255, 120, 0),
-    TextColor = Color3.fromRGB(255, 255, 255)
-}
-
-OrionLib.Themes["Custom"] = {
-    Main = Colors.WindowBackground,
-    Background = Colors.Background,
-    Nav = Colors.NavBackground,
-    Tab = Colors.TabStroke,
-    Element = Colors.ElementStroke,
-    Toggle = Colors.ToggleEnabled,
-    Slider = Colors.SliderProgress,
-    Text = Colors.TextColor
-}
-
 local Window = OrionLib:MakeWindow({
     Name = "FTAP(반물사) | (made by 알파카)",
     HidePremium = true,
@@ -40,6 +18,27 @@ local Window = OrionLib:MakeWindow({
         Key = "파카허브v30"
     }
 })
+
+local ThemeTable = game:GetService("CoreGui"):FindFirstChild("Orion") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Orion")
+if ThemeTable then
+    local ThemeConfig = {
+        Main = Color3.fromRGB(0, 0, 0),
+        Background = Color3.fromRGB(5, 5, 5),
+        Nav = Color3.fromRGB(10, 10, 10),
+        Tab = Color3.fromRGB(255, 0, 0),
+        Element = Color3.fromRGB(0, 255, 100),
+        Toggle = Color3.fromRGB(255, 120, 0),
+        Slider = Color3.fromRGB(255, 120, 0),
+        Text = Color3.fromRGB(255, 255, 255)
+    }
+    
+    pcall(function()
+        for k, v in pairs(ThemeConfig) do
+            OrionLib.Theme[k] = v
+        end
+    end)
+end
+
 local FN_BYPASS = false
 local TESTPP = false
 
