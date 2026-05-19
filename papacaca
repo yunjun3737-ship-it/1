@@ -10148,31 +10148,28 @@ Rayfield:Notify({
 })
 
 
+
+                    -- =============================================================================
+-- [ 전용 블랙리스트 탭 생성 및 실시간 알림 시스템 ]
+-- =============================================================================
+
 local BlacklistTab = Window:CreateTab("블랙리스트❌", 0)
-
-
 local ChatBlacklist = {}
-
-
 local BlacklistUIElements = {}
 
 local function RefreshBlacklistUI()
-    
     for _, element in ipairs(BlacklistUIElements) do
         pcall(function() element:Destroy() end)
     end
     table.clear(BlacklistUIElements)
 
-    
     local titleLabel = BlacklistTab:CreateLabel("📜 현재 등록된 블랙리스트")
     table.insert(BlacklistUIElements, titleLabel)
 
-    
     if #ChatBlacklist == 0 then
         local emptyLabel = BlacklistTab:CreateLabel("현재 등록된 블랙리스트 유저가 없습니다.")
         table.insert(BlacklistUIElements, emptyLabel)
     else
-        
         for _, bannedName in ipairs(ChatBlacklist) do
             local userLabel = BlacklistTab:CreateLabel("🚫 " .. bannedName)
             table.insert(BlacklistUIElements, userLabel)
@@ -10180,18 +10177,14 @@ local function RefreshBlacklistUI()
     end
 end
 
-
 RefreshBlacklistUI()
 
-
 local function ProcessBlacklistCommand(message)
-
     if string.sub(message, 1, 1) == ";" then
-        local targetSearchName = string.sub(message, 2) -- ';' 뒤의 텍스트 추출
+        local targetSearchName = string.sub(message, 2)
         if targetSearchName == "" then return end
 
         local foundPlayer = nil
-        
         
         for _, v in pairs(game:GetService("Players"):GetPlayers()) do
             if string.find(string.lower(v.Name), string.lower(targetSearchName)) then
@@ -10200,14 +10193,11 @@ local function ProcessBlacklistCommand(message)
             end
         end
 
-        
         if foundPlayer then
             local realName = foundPlayer.Name
             
-        
             if not table.find(ChatBlacklist, realName) then
-                table.insert(ChatBlacklist, realName) -- 블랙리스트 테이블에 추가
-                
+                table.insert(ChatBlacklist, realName)
                 
                 pcall(function()
                     local TextChatService = game:GetService("TextChatService")
@@ -10216,7 +10206,6 @@ local function ProcessBlacklistCommand(message)
                     end
                 end)
 
-                
                 Rayfield:Notify({
                     Title = "블랙리스트 설정 완료",
                     Content = "블랙리스트 " .. realName .. "으로 설정완료되었습니다",
@@ -10224,7 +10213,6 @@ local function ProcessBlacklistCommand(message)
                     Image = 4483362458
                 })
 
-            
                 RefreshBlacklistUI()
             else
                 Rayfield:Notify({
@@ -10234,7 +10222,6 @@ local function ProcessBlacklistCommand(message)
                 })
             end
         else
-            
             Rayfield:Notify({
                 Title = "등록 실패",
                 Content = "서버에서 '" .. targetSearchName .. "' 유저를 찾을 수 없습니다.",
@@ -10244,12 +10231,10 @@ local function ProcessBlacklistCommand(message)
     end
 end
 
-
 pcall(function()
     game:GetService("TextChatService").MessageReceived:Connect(function(textChatMessage)
         if textChatMessage.TextSource then
             local sender = game:GetService("Players"):GetPlayerByUserId(textChatMessage.TextSource.UserId)
-            
             if sender == game.Players.LocalPlayer then
                 ProcessBlacklistCommand(textChatMessage.Text)
             end
@@ -10261,3 +10246,58 @@ game.Players.LocalPlayer.Chatted:Connect(function(message)
     ProcessBlacklistCommand(message)
 end)
 
+-- =============================================================================
+-- [ 블랙리스트 해제 
+-- =============================================================================
+
+BlacklistTab:CreateInput({
+    Name = "블랙리스트 해제",
+    PlaceholderText = "해제할 유저의 닉네임 입력",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(Text)
+          end
+        
+        local foundPlayer = nil
+        for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+            if string.find(string.lower(v.Name), string.lower(Text)) then
+                foundPlayer = v
+                break
+            end
+        end
+
+        if foundPlayer then
+            local realName = foundPlayer.Name
+            local displayName = foundPlayer.DisplayName
+            local index = table.find(ChatBlacklist, realName)
+            
+            if index then
+                table.remove(ChatBlacklist, index)
+                RefreshBlacklistUI()
+            end
+            
+            local currentTime = os.date("%X")
+            
+            Rayfield:Notify({
+                Title = "블랙리스트 해제 완료",
+                Content = "@" .. realName .. "(" .. displayName .. ") 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]",
+                Duration = 5,
+                Image = 4483362458
+            })
+            
+            task.spawn(function()
+                local label1 = BlacklistTab:CreateLabel("@" .. realName .. "@haminbabababbobobo")
+                local label2 = BlacklistTab:CreateLabel(displayName .. "(BC7 rogun) 블랙리스트에 해제 되었습니다[ " .. currentTime .. " ]")
+                
+                task.wait(10)
+                pcall(function() label1:Destroy() end)
+                pcall(function() label2:Destroy() end)
+            end)
+        else
+            Rayfield:Notify({
+                Title = "오류",
+                Content = "서버에서 해당 유저를 찾을 수 없습니다.",
+                Duration = 3
+            })
+        end
+    end,
+})
