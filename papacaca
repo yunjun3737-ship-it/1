@@ -7,30 +7,6 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
     Name = "FTAP(반물사) | (made by 알파카)"}
-task.wait(0.5)
-
-Rayfield:Notify({
-    Title = "파카허브",
-    Content = "로딩중...",
-    Duration = 2.5,
-    Image = 4483362458
-})
-
-task.wait(1.2)
-
-local Loading = Rayfield:CreateLabel("● 파카허브 ●", nil, Color3.fromRGB(255, 40, 40))
-
-task.wait(0.7)
-Loading:Set("◆ 로딩중... ◆")
-task.wait(0.8)
-Loading:Set("■ 시스템 초기화 ■")
-task.wait(0.9)
-Loading:Set("▲ apapcaca ▲")
-task.wait(1.0)
-Loading:Set("◆ 파카허브 로딩 완료 ◆")
-task.wait(1.2)
-
-Loading:Set("")  
     LoadingTitle = "AIPA Script Loading",
     LoadingSubtitle = "by Alpaca",
     ConfigurationSaving = {
@@ -38,13 +14,13 @@ Loading:Set("")
         FolderName = "파카허브(1티어)",
         FileName = "AIPA_FTAP_Config"
     },
-    KeySystem = true, -- 키 시스템 활성화
+    KeySystem = true, 
     KeySettings = {
         Title = "파카허브 키시스템",
         Subtitle = "인증 키를 입력하세요",
         Note = "오너(알파카👑)에게서 키를 받을수있습니다.(800로벅)",
         FileName = "AIPA_Key", 
-        SaveKey = true, -- 키 자동 저장
+        SaveKey = true, 
         GrabKeyFromSite = false, 
         Key = {"파카허브v30"} 
     }
