@@ -40,7 +40,7 @@ local RankTab = Window:CreateTab("제작자 친구", 6034281935)
 local environmentTab = Window:CreateTab("환경 설정", 6023426923)   
 local combatTab = Window:CreateTab("전투 확장", 6026568198)        
 local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집)", 6034831332)  
-
+local cmdWindowTab = Window:CreateTab("명령어 콘솔",6023426923 )
 
 Players = game:GetService("Players")
 plr = game.Players.LocalPlayer
@@ -10249,3 +10249,249 @@ BlacklistTab:CreateInput({
     end
 })
 
+
+
+cmdWindowTab:CreateSection("Console Status")
+cmdWindowTab:CreateLabel("명령어 작동중✅")
+
+cmdWindowTab:CreateSection("Command List")
+cmdWindowTab:CreateLabel("1. ;network owner = \"PlayerName\"")
+cmdWindowTab:CreateLabel("2. ;kick logs")
+cmdWindowTab:CreateLabel("3. ;kill \"PlayerName\"")
+cmdWindowTab:CreateLabel("4. ;fling \"PlayerName\"")
+cmdWindowTab:CreateLabel("5. ;unfling")
+cmdWindowTab:CreateLabel("6. ;bring \"PlayerName\"")
+cmdWindowTab:CreateLabel("7. ;ragdoll \"PlayerName\"")
+cmdWindowTab:CreateLabel("8. ;unragdoll \"PlayerName\"")
+cmdWindowTab:CreateLabel("9. ;anchor \"PlayerName\"")
+cmdWindowTab:CreateLabel("10. ;unanchor \"PlayerName\"")
+
+local kickedPlayersLogs = {}
+
+local function createLogGui()
+    local sg = Instance.new("ScreenGui")
+    sg.Name = "KickLogGui"
+    sg.ResetOnSpawn = false
+    sg.Parent = game:GetService("CoreGui")
+
+    local frame = Instance.new("Frame")
+    frame.Size = UScale and UDim2.new(0, 350, 0, 400) or UDim2.new(0, 350, 0, 400)
+    frame.Position = UDim2.new(0.5, -175, 0.5, -200)
+    frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    frame.BorderSizePixel = 0
+    frame.Active = true
+    frame.Draggable = true
+    frame.Parent = sg
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 8)
+    corner.Parent = frame
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, -40, 0, 40)
+    title.Position = UDim2.new(0, 10, 0, 0)
+    title.BackgroundTransparency = 1
+    title.Text = "Kicked Players Logs"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 18
+    title.Font = Enum.Font.SourceSansBold
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Parent = frame
+
+    local closeBtn = Instance.new("TextButton")
+    closeBtn.Size = UDim2.new(0, 30, 0, 30)
+    closeBtn.Position = UDim2.new(1, -35, 0, 5)
+    closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    closeBtn.Text = "X"
+    closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeBtn.TextSize = 16
+    closeBtn.Font = Enum.Font.SourceSansBold
+    closeBtn.Parent = frame
+
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 4)
+    btnCorner.Parent = closeBtn
+
+    closeBtn.MouseButton1Click:Connect(function()
+        sg:Destroy()
+    end)
+
+    local container = Instance.new("ScrollingFrame")
+    container.Size = UDim2.new(1, -20, 1, -60)
+    container.Position = UDim2.new(0, 10, 0, 50)
+    container.BackgroundTransparency = 1
+    container.CanvasSize = UDim2.new(0, 0, 0, 0)
+    container.ScrollBarThickness = 6
+    container.Parent = frame
+
+    local layout = Instance.new("UIListLayout")
+    layout.Padding = UDim.new(0, 5)
+    layout.Parent = container
+
+    layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        container.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y)
+    end)
+
+    if #kickedPlayersLogs == 0 then
+        local noLog = Instance.new("TextLabel")
+        noLog.Size = UDim2.new(1, 0, 0, 30)
+        noLog.BackgroundTransparency = 1
+        noLog.Text = "No logs found."
+        noLog.TextColor3 = Color3.fromRGB(150, 150, 150)
+        noLog.TextSize = 14
+        noLog.Font = Enum.Font.SourceSans
+        noLog.Parent = container
+    else
+        for _, name in ipairs(kickedPlayersLogs) do
+            local item = Instance.new("TextLabel")
+            item.Size = UDim2.new(1, 0, 0, 30)
+            item.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            item.Text = "  " .. name
+            item.TextColor3 = Color3.fromRGB(230, 230, 230)
+            item.TextSize = 14
+            item.Font = Enum.Font.SourceSans
+            item.TextXAlignment = Enum.TextXAlignment.Left
+            item.Parent = container
+
+            local itemCorner = Instance.new("UICorner")
+            itemCorner.CornerRadius = UDim.new(0, 4)
+            itemCorner.Parent = item
+        end
+    end
+end
+
+local function getTargetPlayer(namePart)
+    if not namePart or namePart == "" then return nil end
+    for _, p in ipairs(game.Players:GetPlayers()) do
+        if p.Name:lower():sub(1, #namePart) == namePart:lower() or (p.DisplayName and p.DisplayName:lower():sub(1, #namePart) == namePart:lower()) then
+            return p
+        end
+    end
+    return nil
+end
+
+local function runChatCommand(msg)
+    if msg:sub(1, 1) ~= ";" then return end
+    
+    local cleanMsg = msg:sub(2)
+    
+    if cleanMsg:sub(1, 14) == "network owner " then
+        local targetStr = cleanMsg:sub(15)
+        local targetName = targetStr:match('=%s*"([^"]+)"') or targetStr:match("=%s*(.-)$")
+        if targetName then
+            local targetPlr = getTargetPlayer(targetName)
+            if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+                local hrp = targetPlr.Character.HumanoidRootPart
+                game:GetService("ReplicatedStorage").GrabEvents.SetNetworkOwner:FireServer(hrp, hrp.CFrame)
+                Rayfield:Notify({
+                    Title = "Network Owner",
+                    Content = "네트워크 오너가 " .. targetPlr.Name .. "으로 설정되었습니다.",
+                    Duration = 5,
+                    Image = 4483362458
+                })
+            end
+        end
+        
+    elseif cleanMsg == "kick logs" then
+        createLogGui()
+        
+    elseif cleanMsg:sub(1, 5) == "kill " then
+        local targetStr = cleanMsg:sub(6)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character then
+            local hrp = targetPlr.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                game:GetService("ReplicatedStorage").GrabEvents.SetNetworkOwner:FireServer(hrp, hrp.CFrame)
+                task.wait(0.05)
+                game:GetService("ReplicatedStorage").GrabEvents.DestroyGrabLine:FireServer(hrp, hrp.CFrame)
+                table.insert(kickedPlayersLogs, targetPlr.Name)
+            end
+        end
+        
+    elseif cleanMsg:sub(1, 6) == "fling " then
+        local targetStr = cleanMsg:sub(7)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+            _G.FlingTargetPlayer = targetPlr
+            _G.FlingLoopActive = true
+            task.spawn(function()
+                while _G.FlingLoopActive and _G.FlingTargetPlayer == targetPlr do
+                    pcall(function()
+                        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(9999, 9999, 9999)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetPlr.Character.HumanoidRootPart.CFrame
+                        end
+                     pcall(function() game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true end)
+                    end)
+                    task.wait()
+                end
+            end)
+        end
+        
+    elseif cleanMsg == "unfling" then
+        _G.FlingLoopActive = false
+        _G.FlingTargetPlayer = nil
+        pcall(function()
+            if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+                game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+            end
+        end)
+        
+    elseif cleanMsg:sub(1, 6) == "bring " then
+        local targetStr = cleanMsg:sub(7)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local tHrp = targetPlr.Character.HumanoidRootPart
+            local myHrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+            game:GetService("ReplicatedStorage").GrabEvents.SetNetworkOwner:FireServer(tHrp, tHrp.CFrame)
+            task.wait(0.05)
+            tHrp.CFrame = myHrp.CFrame * CFrame.new(0, 0, -3)
+        end
+        
+    elseif cleanMsg:sub(1, 8) == "ragdoll " then
+        local targetStr = cleanMsg:sub(9)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+            local tHrp = targetPlr.Character.HumanoidRootPart
+            game:GetService("ReplicatedStorage").CharacterEvents.RagdollRemote:FireServer(tHrp, 1)
+        end
+        
+    elseif cleanMsg:sub(1, 10) == "unragdoll " then
+        local targetStr = cleanMsg:sub(11)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+            local tHrp = targetPlr.Character.HumanoidRootPart
+            game:GetService("ReplicatedStorage").CharacterEvents.RagdollRemote:FireServer(tHrp, 0)
+        end
+        
+    elseif cleanMsg:sub(1, 7) == "anchor " then
+        local targetStr = cleanMsg:sub(8)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+            local tHrp = targetPlr.Character.HumanoidRootPart
+            game:GetService("ReplicatedStorage").GrabEvents.SetNetworkOwner:FireServer(tHrp, tHrp.CFrame)
+            task.wait(0.05)
+            tHrp.Anchored = true
+        end
+        
+    elseif cleanMsg:sub(1, 9) == "unanchor " then
+        local targetStr = cleanMsg:sub(10)
+        local targetName = targetStr:match('^"([^"]+)"') or targetStr
+        local targetPlr = getTargetPlayer(targetName)
+        if targetPlr and targetPlr.Character and targetPlr.Character:FindFirstChild("HumanoidRootPart") then
+            local tHrp = targetPlr.Character.HumanoidRootPart
+            game:GetService("ReplicatedStorage").GrabEvents.SetNetworkOwner:FireServer(tHrp, tHrp.CFrame)
+            task.wait(0.05)
+            tHrp.Anchored = false
+        end
+    end
+end
+
+game.Players.LocalPlayer.Chatted:Connect(runChatCommand)
