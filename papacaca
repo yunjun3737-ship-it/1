@@ -42,82 +42,6 @@ local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집
 local cmdWindowTab = Window:CreateTab("명령어 콘솔",6023426923 )
 local TargetTab = Window:CreateTab("ui설정")
 
-if TargetTab then
-    local SelectedTheme = RayfieldLibrary.Theme.Default
-    local themeSection = TargetTab:CreateSection("✨ 파카허브 UI 색상 커스텀")
-    
-    TargetTab:CreateColorPicker({
-        Name = "내부 배경 색상 (Background)",
-        Color = Color3.fromRGB(0, 0, 0),
-        Callback = function(Value)
-            SelectedTheme.Background = Value
-            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
-            if Rayfield and Rayfield:FindFirstChild("Main") then
-                Rayfield.Main.BackgroundColor3 = Value
-                if Rayfield.Main:FindFirstChild("Notice") then Rayfield.Main.Notice.BackgroundColor3 = Value end
-                for _, element in ipairs(Rayfield.Main:GetDescendants()) do
-                    if element.Name == "Template" or element:GetAttribute("IsElement") then
-                        element.BackgroundColor3 = Value
-                    elseif element:IsA("Frame") and (element.Name == "Main" or element.Name == "Elements" or element.Name == "Tabs") then
-                        element.BackgroundColor3 = Value
-                    end
-                end
-            end
-        end
-    })
-
-    TargetTab:CreateColorPicker({
-        Name = "겉테두리 색상 (Outer Border)",
-        Color = Color3.fromRGB(0, 150, 255),
-        Callback = function(Value)
-            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
-            if Rayfield and Rayfield:FindFirstChild("Main") then
-                if Rayfield.Main:FindFirstChild("UIStroke") then
-                    Rayfield.Main.UIStroke.Color = Value
-                end
-                for _, item in ipairs(Rayfield.Main:GetChildren()) do
-                    if item:IsA("UIStroke") then
-                        item.Color = Value
-                    end
-                end
-            end
-        end
-    })
-
-    TargetTab:CreateColorPicker({
-        Name = "내부 테두리 색상 (Inner Stroke)",
-        Color = Color3.fromRGB(255, 0, 0),
-        Callback = function(Value)
-            SelectedTheme.ElementStroke = Value
-            SelectedTheme.SecondaryElementStroke = Value
-            SelectedTheme.TabStroke = Value
-            SelectedTheme.ToggleEnabledStroke = Value
-            SelectedTheme.InputStroke = Value
-            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
-            if Rayfield and Rayfield:FindFirstChild("Main") then
-                for _, item in ipairs(Rayfield.Main:GetDescendants()) do
-                    if item:IsA("UIStroke") and item.Parent ~= Rayfield.Main then
-                        item.Color = Value
-                    end
-                end
-            end
-        end
-    })
-
-    TargetTab:CreateColorPicker({
-        Name = "입체 그림자 섀도우 (Shadow)",
-        Color = Color3.fromRGB(0, 70, 180),
-        Callback = function(Value)
-            SelectedTheme.Shadow = Value
-            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
-            if Rayfield and Rayfield:FindFirstChild("Main") and Rayfield.Main:FindFirstChild("Shadow") and Rayfield.Main.Shadow:FindFirstChild("Image") then
-                Rayfield.Main.Shadow.Image.ImageColor3 = Value
-            end
-        end
-    })
-end
-
-    
 
 
 Players = game:GetService("Players")
@@ -10634,3 +10558,4 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         ShowKickLogs()
     end
 end)
+TargetTab:CreateLabel("맨위에 왼쪽에 돋보기 옆을 누르고 쭉 내리면 ui설정하는곳이 있습니다.")
