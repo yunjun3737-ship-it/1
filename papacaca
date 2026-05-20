@@ -19,7 +19,7 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
         Title = "파카허브 키시스템",
         Subtitle = "인증 키를 입력하세요",
-        Note = "오너(알파카👑)에게서 키를 받을수있습니다.(800로벅)",
+        Note = "오너(알파카👑)에게서 키를 받을수있습니다.",
         FileName   = "AIPA_Key", 
         SaveKey = true, 
         GrabKeyFromSite = false, 
@@ -6386,7 +6386,7 @@ end
 
 DevTab:CreateToggle({
     Name = "Mobile Crosshair TP (기본 ON)",
-    CurrentValue = flase,   -- ← 스크립트 실행 시 자동 ON
+    CurrentValue = flase,   
     Flag = "MobileTPDev",
     Callback = function(Value)
         tpEnabled = Value
@@ -6595,7 +6595,7 @@ DevTab:CreateButton({
     Name = "열차조종[fly혹은 그랩으로 가능]",
     Callback = TrSw
 })
-
+DevTab:CreateLabel("명단에 플레이어를 추가하여사용하실수 있습니다.")
 DevTab:CreateSection("OWNER")
 local Loop1 = DevTab:CreateToggle({
     Name = "PTM",
@@ -6617,7 +6617,6 @@ local Loop1 = DevTab:CreateToggle({
     end
 })
 
-DevTab:CreateButton({
     Name = "킬 [ Owner ]",
     Callback = function()
         table.clear(playersInLoop2V)
@@ -6933,7 +6932,7 @@ grabTab:CreateToggle({
         KillGrabF()
     end
 })
-
+grabTab:CreateLabel("킥그랩은 엄청오랫동안 잡아야 킥됩니다.")
 grabTab:CreateToggle({ 
     Name = "[ 무효시키기 ]", 
     CurrentValue = false,
@@ -7177,7 +7176,7 @@ local WhiteListToggle = antiTab:CreateToggle({
 antiTab:CreateSection("하우스 브레이커")
 
 local HouseBreakToggle = antiTab:CreateToggle({
-    Name = "하우스 브레이크 (집안 물건 들이기)",
+    Name = "하우스 브레이크 (렉조금)",
     CurrentValue = false,
     Flag = "HouseBreakToggle",
     Callback = function(Value)
@@ -7261,7 +7260,7 @@ ListTab:CreateButton({
     end
 })
 end
-
+ListTab:CreateLabel("본인의 친구는 제외되도록 하는곳입니다. 조지기탭과 연결되지않습니다.")
 ListTab:CreateSection("White")
 local Dropdown = ListTab:CreateDropdown({
     Name = "친구",
@@ -7291,7 +7290,7 @@ ListTab:CreateInput({
         removeFromList(Whitelist, Dropdown, Value)
     end
 })
-
+ListTab:CreateLabel("이글 밑에 리스트에 추가해야 조지기탭에서 플레이어를 킥하거나 킬할수있습니다.")
 ListTab:CreateSection("List")
 local DropdownV1 = ListTab:CreateDropdown({
     Name = "족칠 새끼 고르기",
@@ -7322,7 +7321,6 @@ ListTab:CreateInput({
     end
 })
 
---[[
 LoopTab:CreateSection("TP")
 local HRPMODE = LoopTab:CreateToggle({
     Name = "HRP MODE TP",
@@ -7333,8 +7331,8 @@ local HRPMODE = LoopTab:CreateToggle({
     end
 })
 HRPMODE:Set(true)
-]]--
 
+LoopTab:CreateLabel("이곳은 명단 채널에서 플레이어를입력후 플레이어를 족치는 칸입니다.(명단에 없을시 작동×)
 LoopTab:CreateSection("Bring")
 LoopTab:CreateButton({
     Name = "끌고오기 [ Blobman ]",
@@ -8067,7 +8065,7 @@ LoopTab:CreateButton({
         end
     end
 })
-
+antiTab:CreateLabel("파카허브의 핵심기능입니다. 기본으로켜진기능은 끄지않으시는걸 추천합니다.")
 antiTab:CreateSection("Teleport | Toggle")
 local AntiGrabV1 = antiTab:CreateToggle({
     Name = "무질량 이동 | TP",
@@ -8397,9 +8395,9 @@ local FlyingReset = antiTab:CreateToggle({
     end
 })
 
--- Reset after protection (1 second delay)
+-- Reset after protection (3 second delay)
 resetProtectionConn = plr.CharacterAdded:Connect(function(char)
-    task.wait(1)
+    task.wait(3)
     
     local hum = char:WaitForChild("Humanoid", 5)
     if hum then
@@ -8697,7 +8695,7 @@ local walkSpeedInput = playerTab:CreateInput({
     end
 })
 walkSpeedInput:Set(80)
-
+PlayerTab:CreateLabel("이동속도의경우 유틸리티 맨마지막 관성제거를 키시는걸 추천합니다.")
 playerTab:CreateSection("")
 playerTab:CreateToggle({
     Name = "점프 높이",
