@@ -105,7 +105,7 @@ if TargetTab then
     })
 
     TargetTab:CreateColorPicker({
-        Name = "입체 그림자 색상 (Shadow)",
+        Name = "입체 그림자 섀도우 (Shadow)",
         Color = Color3.fromRGB(0, 70, 180),
         Callback = function(Value)
             SelectedTheme.Shadow = Value
@@ -117,6 +117,7 @@ if TargetTab then
     })
 end
 
+    
 
 
 Players = game:GetService("Players")
