@@ -10249,10 +10249,6 @@ BlacklistTab:CreateInput({
     end
 })
 
-
-
-local cmdWindowTab = Window:CreateTab("명령어 콘솔⌨️", 0)
-
 cmdWindowTab:CreateSection("Console Status")
 cmdWindowTab:CreateLabel("명령어 작동중✅")
 
