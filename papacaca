@@ -41,7 +41,7 @@ local combatTab = Window:CreateTab("전투 확장", 6026568198)
 local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집)", 6034831332)  
 local cmdWindowTab = Window:CreateTab("명령어 콘솔",6023426923 )
 local MyCustomSettingsTab = Window:CreateTab("설정 및 커스텀(ui설정)", 4483362458)
-RayfieldLibrary:CreateThemeEditor(MyCustomSettingsTab)
+
 
 Players = game:GetService("Players")
 plr = game.Players.LocalPlayer
@@ -10557,3 +10557,4 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         ShowKickLogs()
     end
 end)
+RayfieldLibrary:CreateThemeEditor(MyCustomSettingsTab)
