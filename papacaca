@@ -7320,7 +7320,7 @@ ListTab:CreateInput({
         removeFromList(playersInLoop1V, DropdownV1, Value)
     end
 })
-
+]--
 LoopTab:CreateSection("TP")
 local HRPMODE = LoopTab:CreateToggle({
     Name = "HRP MODE TP",
@@ -7331,7 +7331,7 @@ local HRPMODE = LoopTab:CreateToggle({
     end
 })
 HRPMODE:Set(true)
-
+]--
 LoopTab:CreateLabel("이곳은 명단 채널에서 플레이어를입력후 플레이어를 족치는 칸입니다.(명단에 없을시 작동×)
 LoopTab:CreateSection("Bring")
 LoopTab:CreateButton({
