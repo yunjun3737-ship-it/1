@@ -40,7 +40,65 @@ local environmentTab = Window:CreateTab("환경 설정", 6023426923)
 local combatTab = Window:CreateTab("전투 확장", 6026568198)        
 local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집)", 6034831332)  
 local cmdWindowTab = Window:CreateTab("명령어 콘솔",6023426923 )
-local MyCustomSettingsTab = Window:CreateTab("설정 및 커스텀(ui설정)", 4483362458)
+local TargetTab = Window:CreateTab("ui설정")
+
+if TargetTab then
+    local themeSection = TargetTab:CreateSection("파카허브 UI 색상 커스텀")
+    
+    TargetTab:CreateColorPicker({
+        Name = "내부 배경 색상 (Background)",
+        Color = Color3.fromRGB(0, 0, 0),
+        Callback = function(Value)
+            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+            if Rayfield and Rayfield:FindFirstChild("Main") then
+                Rayfield.Main.BackgroundColor3 = Value
+                if Rayfield.Main:FindFirstChild("Notice") then Rayfield.Main.Notice.BackgroundColor3 = Value end
+                for _, element in ipairs(Rayfield.Main:GetDescendants()) do
+                    if element.Name == "Template" or element:GetAttribute("IsElement") then
+                        element.BackgroundColor3 = Value
+                    end
+                end
+            end
+        end
+    })
+
+    TargetTab:CreateColorPicker({
+        Name = "겉테두리 색상 (Outer Border)",
+        Color = Color3.fromRGB(0, 150, 255),
+        Callback = function(Value)
+            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+            if Rayfield and Rayfield:FindFirstChild("Main") and Rayfield.Main:FindFirstChild("UIStroke") then
+                Rayfield.Main.UIStroke.Color = Value
+            end
+        end
+    })
+
+    TargetTab:CreateColorPicker({
+        Name = "내부 테두리 색상 (Inner Stroke)",
+        Color = Color3.fromRGB(255, 0, 0),
+        Callback = function(Value)
+            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+            if Rayfield and Rayfield:FindFirstChild("Main") then
+                for _, item in ipairs(Rayfield.Main:GetDescendants()) do
+                    if item:IsA("UIStroke") and item.Parent ~= Rayfield.Main then
+                        item.Color = Value
+                    end
+                end
+            end
+        end
+    })
+
+    TargetTab:CreateColorPicker({
+        Name = "입체 그림자 색상 (Shadow)",
+        Color = Color3.fromRGB(0, 70, 180),
+        Callback = function(Value)
+            local Rayfield = game:GetService("CoreGui"):FindFirstChild("Rayfield") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+            if Rayfield and Rayfield:FindFirstChild("Main") and Rayfield.Main:FindFirstChild("Shadow") and Rayfield.Main.Shadow:FindFirstChild("Image") then
+                Rayfield.Main.Shadow.Image.ImageColor3 = Value
+            end
+        end
+    })
+end
 
 
 Players = game:GetService("Players")
