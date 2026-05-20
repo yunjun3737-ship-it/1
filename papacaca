@@ -10615,4 +10615,3 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         ShowKickLogs()
     end
 end)
-RayfieldLibrary:CreateThemeEditor(MyCustomSettingsTab)
