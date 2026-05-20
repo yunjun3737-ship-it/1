@@ -8,7 +8,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
     Name = "FTAP(반물사) | (made by 알파카)",
-    LoadingTitle = "AIPA Script Loading",
+    LoadingTitle = "알파스크립트 로딩중",
     LoadingSubtitle = "by Alpaca",
     ConfigurationSaving = {
         Enabled = true,
