@@ -10632,7 +10632,7 @@ ControlTab:CreateButton({
         local plr = game.Players.LocalPlayer
         if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") then
             
-            plr.Character:FindFirstChildOfClass("Humanoid").Health = inf
+            plr.Character:FindFirstChildOfClass("Humanoid").Health = 0
         end
 
         print("[정지 완료] 모든 루프 멈춤 및 캐릭터 리스폰 완료. 기능을 다시 켜서 사용하세요.")
