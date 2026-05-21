@@ -41,7 +41,7 @@ local combatTab = Window:CreateTab("전투 확장", 6026568198)
 local BlacklistTab = Window:CreateTab("블랙리스트(좆장애창녀 모음집)", 6034831332)  
 local cmdWindowTab = Window:CreateTab("명령어 콘솔",6023426923 )
 local TargetTab = Window:CreateTab("ui설정")
-
+local ControlTab = Window:CreateTab("스크립트 제어", 4483362458)
 
 
 Players = game:GetService("Players")
@@ -10559,3 +10559,82 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 end)
 TargetTab:CreateLabel("맨위에 왼쪽에 돋보기 옆을 누르고 쭉 내리면 ui설정하는곳이 있습니다.")
+
+ControlTab:CreateButton({
+    Name = "모든 기능 즉시 정지",
+    Callback = function()
+        warn("[정지 명령] 모든 활성화된 스크립트 기능을 강제 종료합니다.")
+
+
+        AutoGucciT = false
+        blobLoopT = false
+        blobLoopT2 = false
+        blobLoopT3 = false
+        blobLoopT4 = false
+        permRagdollT = false
+        RagdollWalkT = false
+        RagdollGrabT = false
+        AntiGrabStickyT = false
+        AntiKickT = false
+        AutoAttackT = false
+        AntiStruggleGrabT = false
+        KillGrabT = false
+        MasslessGrabT = false
+        NoClipGrabT = false
+        ViewToolT = false
+        ViewAuraT = false
+        AntiBananaAuraT = false
+        AntiBoxT = false
+        AntiBananaT = false
+        ifKickThenT = false
+        AntiBlobUseT = false
+        LoopSnowBallT = false
+        AntiPCLDT = false
+        LineLagT = false
+        clicking = false
+        fakeLag = false
+        tpRunning = false
+        loopPlayerT = false
+        loopPlayerT2 = false
+        loopPlayerT3 = false
+        AntiStickyGBT = false
+        AntiPaintT = false
+        noClipT = false
+        masslessT = false
+        sitJumpT = false
+        antiInPlotsEnabled = false
+        BreakHouseBarrierT = false
+        TokraOwnerKickT = false
+        OwnerLoopKickT = false
+        AntiBurnV = false
+
+        
+        _G.A_G = false   
+        _G.P_H = false   
+        _G.N_R = false   
+        _G.A_J = false   
+        _G.S_N = false   
+        _G.B_W = false   
+        _G.P_S = false  
+        _G.N_S = false   
+        _G.NoInertia = false
+        _G.FlingLoopActive = false
+
+        local flags = {"C1", "C2", "C3", "C5", "C6", "C10", "E7", "E14", "RagdollLoopToggle", "RagdollWalkToggle"}
+        for _, flagName in ipairs(flags) do
+            if Rayfield.Flags[flagName] then
+                Rayfield.Flags[flagName]:Set(false)
+            end
+        end
+
+        task.wait(0.2)
+
+        local plr = game.Players.LocalPlayer
+        if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") then
+            
+            plr.Character:FindFirstChildOfClass("Humanoid").Health = 0
+        end
+
+        print("[정지 완료] 모든 루프 멈춤 및 캐릭터 리스폰 완료. 기능을 다시 켜서 사용하세요.")
+    end
+})
