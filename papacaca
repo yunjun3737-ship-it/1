@@ -195,11 +195,11 @@ end
 
 function SpawnCFrame()
     local camPart
-    myDisplayName = plr.DisplayName
-    myUserName = plr.Name
-    myPOIdentifier = string.format("[ %s ] ( @%s )", myDisplayName, myUserName)
+    local myDisplayName = plr.DisplayName
+    local myUserName = plr.Name
+    local myPOIdentifier = string.format("[ %s ] ( @%s )", myDisplayName, myUserName)
 
-    function findMyPO()
+    local function findMyPO()
         for _, obj in pairs(workspace:GetChildren()) do
             if obj.Name == "PlayerCharacterLocationDetector" then
                 for _, child in pairs(obj:GetChildren()) do
@@ -213,26 +213,40 @@ function SpawnCFrame()
     end
 
     if not workspace:FindFirstChild("CamPart") or workspace:FindFirstChild("CamPart"):FindFirstChild("CamPart") then
-         char = plr.Character or plr.CharacterAdded:Wait()
-        camPart = char:FindFirstChild("CamPart"):Clone()
-        camPart.Name = "CamPart"
-        camPart.Parent = workspace
-        camPart.Transparency = 0.9
+        local char = plr.Character or plr.CharacterAdded:Wait()
+        local charCamPart = char:WaitForChild("CamPart", 5)
+        if charCamPart then
+            camPart = charCamPart:Clone()
+            camPart.Name = "CamPart"
+            camPart.Parent = workspace
+            camPart.Transparency = 0.9
+        else
+            camPart = workspace:FindFirstChild("CamPart") or Instance.new("Part", workspace)
+            camPart.Name = "CamPart"
+        end
     else
         camPart = workspace.CamPart
     end
 
-     lastHRPVelocity = Vector3.new(0, 0, 0)
+    local lastHRPVelocity = Vector3.new(0, 0, 0)
 
     task.spawn(function()
-         rayParams = RaycastParams.new()
+        local rayParams = RaycastParams.new()
         rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
         while true do
-             ping = plr:GetNetworkPing()
-             myPO = findMyPO()
-             char = plr.Character
-             hrp = char and char:FindFirstChild("HumanoidRootPart")
+            local char = plr.Character
+            local hum = char and char:FindFirstChildOfClass("Humanoid")
+            
+        
+            if not char or not hum or hum.Health <= 0 then
+                task.wait(0.5)
+                continue
+            end
+
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            local ping = plr:GetNetworkPing()
+            local myPO = findMyPO()
 
             if hrp then
                 lastHRPVelocity = hrp.Velocity
@@ -241,11 +255,10 @@ function SpawnCFrame()
             if myPO and hrp then
                 rayParams.FilterDescendantsInstances = {char, camPart, myPO}
 
-                 offset = myPO.Position + (lastHRPVelocity * (ping + 0.15))
-
-                 rayOrigin = offset
-                 rayDirection = Vector3.new(0, 23, 0)
-                 rayResult = workspace:Raycast(rayOrigin, rayDirection, rayParams)
+                local offset = myPO.Position + (lastHRPVelocity * (ping + 0.15))
+                local rayOrigin = offset
+                local rayDirection = Vector3.new(0, 23, 0)
+                local rayResult = workspace:Raycast(rayOrigin, rayDirection, rayParams)
 
                 local targetPosition
 
@@ -255,18 +268,16 @@ function SpawnCFrame()
                     targetPosition = offset + rayDirection
                 end
 
-                 originalRotation = myPO.CFrame.Rotation * CFrame.Angles(math.rad(-90), 0, 0)
+                local originalRotation = myPO.CFrame.Rotation * CFrame.Angles(math.rad(-90), 0, 0)
                 camPart.CFrame = CFrame.new(targetPosition) * originalRotation
 
                 rayParams.FilterDescendantsInstances = {char, camPart}
 
-                 offset = hrp.Position + (lastHRPVelocity * (ping + 0.15))
+                offset = hrp.Position + (lastHRPVelocity * (ping + 0.15))
                 
-                 rayOrigin = offset
-                 rayDirection = Vector3.new(0, 20, 0)
-                 rayResult = workspace:Raycast(rayOrigin, rayDirection, rayParams)
-
-                local targetPosition
+                rayOrigin = offset
+                rayDirection = Vector3.new(0, 20, 0)
+                rayResult = workspace:Raycast(rayOrigin, rayDirection, rayParams)
 
                 if rayResult then
                     targetPosition = rayResult.Position - Vector3.new(0, 0.5, 0)
@@ -274,7 +285,7 @@ function SpawnCFrame()
                     targetPosition = offset + rayDirection
                 end
 
-                 originalRotation = (hrp.CFrame * CFrame.Angles(math.rad(-90), 0, 0)).Rotation
+                originalRotation = (hrp.CFrame * CFrame.Angles(math.rad(-90), 0, 0)).Rotation
                 camPart.CFrame = CFrame.new(targetPosition) * originalRotation
                 camPart.Name = "SpawnCF"
             end
@@ -284,6 +295,7 @@ function SpawnCFrame()
 
     return camPart
 end
+
 
 G = rs.GrabEvents
 G:WaitForChild("EndGrabEarly"):Destroy()
