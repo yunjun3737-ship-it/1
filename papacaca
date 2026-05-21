@@ -10632,9 +10632,58 @@ ControlTab:CreateButton({
         local plr = game.Players.LocalPlayer
         if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") then
             
-            plr.Character:FindFirstChildOfClass("Humanoid").Health = 0
+            plr.Character:FindFirstChildOfClass("Humanoid").Health = inf
         end
 
         print("[정지 완료] 모든 루프 멈춤 및 캐릭터 리스폰 완료. 기능을 다시 켜서 사용하세요.")
+    end
+})
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local FakeLagEnabled = false
+local Connection = nil
+
+local function ApplyFakeLag(char)
+    if not FakeLagEnabled then return end
+    
+    local humanoid = char:WaitForChild("Humanoid", 5)
+    if not humanoid then return end
+    
+    humanoid.Died:Connect(function()
+        if not FakeLagEnabled then return end
+        
+        task.wait(1.5)
+        
+        local startTime = tick()
+        while FakeLagEnabled and (tick() - startTime) < 2.5 do
+            local startFrame = os.clock()
+            while os.clock() - startFrame < 0.1 do end
+            task.wait()
+        end
+    end)
+end
+
+local function ToggleFakeLag(state)
+    FakeLagEnabled = state
+    if FakeLagEnabled then
+        if LocalPlayer.Character then
+            task.spawn(ApplyFakeLag, LocalPlayer.Character)
+        end
+        Connection = LocalPlayer.CharacterAdded:Connect(ApplyFakeLag)
+    else
+        if Connection then
+            Connection:Disconnect()
+            Connection = nil
+        end
+    end
+end
+
+playerTab:CreateToggle({
+    Name = "리스폰렉(루프방지) (4s)",
+    CurrentValue = false,
+    Flag = "RespawnLagToggle",
+    Callback = function(Value)
+        ToggleFakeLag(Value)
     end
 })
